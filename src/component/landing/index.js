@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 class Landing extends React.Component {
   render() {
@@ -6,7 +7,7 @@ class Landing extends React.Component {
       <div>
         <h1>Welcome to Triviapp Landing Page</h1>
         <p>Description will go here</p>
-        <button>Start Game</button>
+        <Link to='/play'>Start Game</Link>
       </div>
     );
   }
