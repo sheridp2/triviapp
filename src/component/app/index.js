@@ -1,10 +1,11 @@
 import React from 'react';
+import Landing from '../landing';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>ITS ALIVE!!!!!</h1>
+        <Landing></Landing>
       </div>
     );
   }
