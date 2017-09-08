@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 
 const QuestionContainer = props => {
-  const questionItems = props.question.map(question => {
-    return (
-
-    )
-  });
-
   return (
-    <ul>
-      {questionItems}
-    </ul>
+    <div>
+      <h2>{props.currentQuestion}</h2>
+      <p>{props.currentAnswer}</p>
+    </div>
   );
 };
 

@@ -6,17 +6,32 @@ import QuestionContainer from '../question-container'
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {questions: []};
+    this.state = {
+      currentQuestion: null,
+      currentAnswer: null,
+    };
   }
 
   componentDidMount() {
     axios.get('https://opentdb.com/api.php?amount=5&difficulty=easy')
-      .then(res => {
-        // console.log('data', res);
-        this.setState({questions: res}, () => {
-          console.log('STATE: ', this.state.questions);
+      .then(questions => {
+        // console.log('WHAT', questions)
+        let res = questions.data.results;
+        let triviaQuestion = res.map(item => {
+          return item.question;
         });
-      });
+        let triviaAnswer = res.map(item => {
+          return item.correct_answer;
+        });
+
+        this.setState({
+          currentQuestion: triviaQuestion[0],
+          currentAnswer: triviaAnswer[0],
+        }, () => {
+          console.log('STATE: ', this.state);
+        });
+      })
+      .catch(console.error);
 
   }
 
@@ -24,7 +39,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Hello this is the game page</h1>
-        <QuestionContainer question={this.state.questions} />
+        <QuestionContainer    currentQuestion={this.state.currentQuestion} currentAnswer={this.state.currentAnswer} />
         <Counter />
         <Counter />
         <Counter />
