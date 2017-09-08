@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
     this.state = {
       currentQuestion: null,
       currentAnswer: null,
+      currentIncorrect: null,
     };
   }
 
@@ -32,10 +33,16 @@ class Dashboard extends React.Component {
           return item.correct_answer;
         });
 
+        let triviaIncorrect = res.map(item => {
+          return item.incorrect_answers;
+        });
+
+        triviaIncorrect[0].push(triviaAnswer[0]);
         this.setState(
           {
             currentQuestion: triviaQuestion[0],
             currentAnswer: triviaAnswer[0],
+            currentIncorrect: triviaIncorrect[0],
           },
           () => {
             console.log('STATE: ', this.state);
@@ -52,10 +59,8 @@ class Dashboard extends React.Component {
         <QuestionContainer
           currentQuestion={this.state.currentQuestion}
           currentAnswer={this.state.currentAnswer}
+          currentIncorrect={this.state.currentIncorrect}
         />
-        <Counter />
-        <Counter />
-        <Counter />
         <Counter />
       </div>
     );
