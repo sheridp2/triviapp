@@ -6,8 +6,8 @@ class QuestionContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
-    let answers = this.props.currentIncorrect.sort(() => Math.random() * 2 - 1);
+    // console.log(this.props);
+    let answers = this.props.currentIncorrect
     return (
       <div>
         <h2>

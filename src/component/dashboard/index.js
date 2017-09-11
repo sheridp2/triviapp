@@ -13,37 +13,42 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      allQuestions: [],
       currentQuestion: [],
       currentAnswer: [],
       currentIncorrect: [],
+      counter: 0,
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({
+      counter: this.state.counter + 1,
+    });
+    this.setState({
+      currentQuestion: this.state.allQuestions[this.state.counter].question,
+      currentAnswer: this.state.allQuestions[this.state.counter].correct_answer,
+      currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
+    });
+
+    if (!this.state.counter == 0) {
+      this.state.allQuestions[this.state.counter].incorrect_answers.push(
+        this.state.allQuestions[this.state.counter].correct_answer
+      );
+    }
+    console.log('answer', this.state.allQuestions[this.state.counter].correct_answer);
   }
 
   componentDidMount() {
     axios
       .get('https://opentdb.com/api.php?amount=5&difficulty=easy')
       .then(questions => {
-        // console.log('WHAT', questions)
         let res = questions.data.results;
-        let triviaQuestion = res.map(item => {
-          let decoded = decodeEntities(item.question);
-          return decoded;
+        this.setState({
+          allQuestions: res,
         });
-        let triviaAnswer = res.map(item => {
-          return item.correct_answer;
-        });
-
-        let triviaIncorrect = res.map(item => {
-          return item.incorrect_answers;
-        });
-
-        triviaIncorrect[0].push(triviaAnswer[0]);
-        this.setState(
-          {
-            currentQuestion: triviaQuestion[0],
-            currentAnswer: triviaAnswer[0],
-            currentIncorrect: triviaIncorrect[0],
-          }
+        this.state.allQuestions[this.state.counter].incorrect_answers.push(
+          this.state.allQuestions[this.state.counter].correct_answer
         );
       });
   }
@@ -57,6 +62,7 @@ class Dashboard extends React.Component {
           currentAnswer={this.state.currentAnswer}
           currentIncorrect={this.state.currentIncorrect}
         />
+        <button onClick={this.handleClick}>Next Question</button>
         <Counter />
       </div>
     );
