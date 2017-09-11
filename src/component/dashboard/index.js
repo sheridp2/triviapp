@@ -13,9 +13,9 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentQuestion: null,
-      currentAnswer: null,
-      currentIncorrect: null,
+      currentQuestion: [],
+      currentAnswer: [],
+      currentIncorrect: [],
     };
   }
 
@@ -43,13 +43,9 @@ class Dashboard extends React.Component {
             currentQuestion: triviaQuestion[0],
             currentAnswer: triviaAnswer[0],
             currentIncorrect: triviaIncorrect[0],
-          },
-          () => {
-            console.log('STATE: ', this.state);
           }
         );
-      })
-      .catch(console.error);
+      });
   }
 
   render() {

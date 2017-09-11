@@ -4,17 +4,22 @@ class QuestionContainer extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
-    let answers = this.props.currentIncorrect;
-    console.log('answers', answers);
+    console.log(this.props);
+    let answers = this.props.currentIncorrect.sort(() => Math.random() * 2 - 1);
     return (
       <div>
         <h2>
           {this.props.currentQuestion}
         </h2>
-        <li>
-          {answers}
-        </li>
+        <ol>
+          {answers.map((answer, i) =>
+            <li key={i}>
+              {answer}
+            </li>
+          )}
+        </ol>
       </div>
     );
   }
