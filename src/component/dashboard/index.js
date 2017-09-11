@@ -22,6 +22,9 @@ class Dashboard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
+    if(this.state.counter > 4){
+      return alert('GAME OVER');
+    }
     this.setState({
       counter: this.state.counter + 1,
     });
@@ -36,7 +39,8 @@ class Dashboard extends React.Component {
         this.state.allQuestions[this.state.counter].correct_answer
       );
     }
-    console.log('answer', this.state.allQuestions[this.state.counter].correct_answer);
+    console.log('answer', this.state.allQuestions[this.state.counter].correct_answer)
+    ;
   }
 
   componentDidMount() {
