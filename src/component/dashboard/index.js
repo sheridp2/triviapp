@@ -18,8 +18,10 @@ class Dashboard extends React.Component {
       currentAnswer: [],
       currentIncorrect: [],
       counter: 0,
+      display: 'answerToggle',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.showAnswer = this.showAnswer.bind(this);
   }
   handleClick() {
     if(this.state.counter > 4){
@@ -32,6 +34,7 @@ class Dashboard extends React.Component {
       currentQuestion: this.state.allQuestions[this.state.counter].question,
       currentAnswer: this.state.allQuestions[this.state.counter].correct_answer,
       currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
+      display : 'answerToggle'
     });
 
     if (!this.state.counter == 0) {
@@ -39,8 +42,6 @@ class Dashboard extends React.Component {
         this.state.allQuestions[this.state.counter].correct_answer
       );
     }
-    console.log('answer', this.state.allQuestions[this.state.counter].correct_answer)
-    ;
   }
 
   componentDidMount() {
@@ -56,6 +57,10 @@ class Dashboard extends React.Component {
         );
       });
   }
+  showAnswer(){
+    let css = (this.state.display === 'answerToggle') ? 'answerToggleOn' : 'answerToggle';
+    this.setState({'display': css});
+  }
 
   render() {
     return (
@@ -67,6 +72,8 @@ class Dashboard extends React.Component {
           currentIncorrect={this.state.currentIncorrect}
         />
         <button onClick={this.handleClick}>Next Question</button>
+        <button onClick={this.showAnswer}>Show Answer</button>
+        <div className={this.state.display}>{this.state.currentAnswer}</div>
         <Counter />
       </div>
     );
