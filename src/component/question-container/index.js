@@ -13,7 +13,7 @@ class QuestionContainer extends Component {
         <h2>
           {this.props.currentQuestion}
         </h2>
-        <ol>
+        <ol type='A'>
           {answers.map((answer, i) =>
             <li key={i}>
               {answer}

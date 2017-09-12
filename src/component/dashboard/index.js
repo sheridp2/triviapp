@@ -24,17 +24,18 @@ class Dashboard extends React.Component {
     this.showAnswer = this.showAnswer.bind(this);
   }
   handleClick() {
-    if(this.state.counter > 4){
+    if(this.state.counter > 9){
       return alert('GAME OVER');
     }
     this.setState({
       counter: this.state.counter + 1,
     });
     this.setState({
-      currentQuestion: this.state.allQuestions[this.state.counter].question,
-      currentAnswer: this.state.allQuestions[this.state.counter].correct_answer,
+      currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
+      currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
       currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
-      display : 'answerToggle'
+      currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
+      display : 'answerToggle',
     });
 
     if (!this.state.counter == 0) {
@@ -46,7 +47,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     axios
-      .get('https://opentdb.com/api.php?amount=5&difficulty=easy')
+      .get('https://opentdb.com/api.php?amount=10&difficulty=easy')
       .then(questions => {
         let res = questions.data.results;
         this.setState({
@@ -65,7 +66,8 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello this is the game page</h1>
+        <h1>Triviapp!!!</h1>
+        <h3>Category:{this.state.currentCategory}</h3>
         <QuestionContainer
           currentQuestion={this.state.currentQuestion}
           currentAnswer={this.state.currentAnswer}
