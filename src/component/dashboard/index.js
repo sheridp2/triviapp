@@ -56,6 +56,14 @@ class Dashboard extends React.Component {
         this.state.allQuestions[this.state.counter].incorrect_answers.push(
           this.state.allQuestions[this.state.counter].correct_answer
         );
+        this.setState({
+          counter: this.state.counter + 1,
+          currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
+          currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
+          currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
+          currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
+          display : 'answerToggle',
+        });
       });
   }
   showAnswer(){
