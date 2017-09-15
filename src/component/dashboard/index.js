@@ -2,6 +2,7 @@ import React from 'react';
 import Counter from '../counter';
 import axios from 'axios';
 import QuestionContainer from '../question-container';
+import DifficultyContainer from '../difficulty-container';
 
 function decodeEntities(input) {
   var y = document.createElement('textarea');
@@ -19,6 +20,7 @@ class Dashboard extends React.Component {
       currentIncorrect: [],
       counter: 0,
       display: 'answerToggle',
+      difficulty: 'easy',
     };
     this.handleClick = this.handleClick.bind(this);
     this.showAnswer = this.showAnswer.bind(this);
@@ -45,9 +47,10 @@ class Dashboard extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
+
     axios
-      .get('https://opentdb.com/api.php?amount=10&difficulty=easy')
+      .get(`https://opentdb.com/api.php?amount=10&difficulty=easy`)
       .then(questions => {
         let res = questions.data.results;
         this.setState({
@@ -75,6 +78,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Triviapp!!!</h1>
+        <DifficultyContainer difficulty={this.state.difficulty} />
         <h3>Category:{this.state.currentCategory}</h3>
         <QuestionContainer
           currentQuestion={this.state.currentQuestion}
