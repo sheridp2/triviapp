@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
       currentIncorrect: [],
       counter: 0,
       display: 'answerToggle',
-      difficulty: 'easy',
+      difficulty: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.showAnswer = this.showAnswer.bind(this);
@@ -45,30 +45,54 @@ class Dashboard extends React.Component {
         this.state.allQuestions[this.state.counter].correct_answer
       );
     }
+
+  }
+  handleChange(e){
+    e.preventDefault();
+    this.setState({difficulty: e.target.value});
+    axios
+      .get(`https://opentdb.com/api.php?amount=10&difficulty=${this.state.difficulty}`)
+      .then(questions => {
+        let res = questions.data.results;
+        this.setState({
+          allQuestions: res,
+        });
+        this.state.allQuestions[this.state.counter].incorrect_answers.push(
+          this.state.allQuestions[this.state.counter].correct_answer
+        );
+        this.setState({
+          counter: this.state.counter + 1,
+          currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
+          currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
+          currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
+          currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
+          display : 'answerToggle',
+        });
+      });
+
   }
 
-  componentWillReceiveProps(props) {
-    console.log('difficulty in receiveProps', props.difficulty);
-    // axios
-    //   .get(`https://opentdb.com/api.php?amount=10&difficulty=${props.difficulty}`)
-    //   .then(questions => {
-    //     let res = questions.data.results;
-    //     this.setState({
-    //       allQuestions: res,
-    //     });
-    //     this.state.allQuestions[this.state.counter].incorrect_answers.push(
-    //       this.state.allQuestions[this.state.counter].correct_answer
-    //     );
-    //     this.setState({
-    //       counter: this.state.counter + 1,
-    //       currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
-    //       currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
-    //       currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
-    //       currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
-    //       display : 'answerToggle',
-    //     });
-    //   });
-  }
+  // componenWillReceiveProps(state) {
+  //   console.log('state', this.state);
+  //   axios
+  //     .get(`https://opentdb.com/api.php?amount=10&difficulty=${this.state.difficulty}`)
+  //     .then(questions => {
+  //       let res = questions.data.results;
+  //       this.setState({
+  //         allQuestions: res,
+  //       });
+  //       this.state.allQuestions[this.state.counter].incorrect_answers.push(
+  //         this.state.allQuestions[this.state.counter].correct_answer
+  //       );
+  //       this.setState({
+  //         currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
+  //         currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
+  //         currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
+  //         currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
+  //         display : 'answerToggle',
+  //       });
+  //     });
+  // }
   showAnswer(){
     let css = (this.state.display === 'answerToggle') ? 'answerToggleOn' : 'answerToggle';
     this.setState({'display': css});
@@ -78,8 +102,9 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Triviapp!!!</h1>
-        <DifficultyContainer difficulty={this.state.difficulty} />
+        <DifficultyContainer difficulty={this.state.difficulty} handleChange={this.handleChange.bind(this)}/>
         <h3>Category:{this.state.currentCategory}</h3>
+        <h3>Difficulty:{this.state.difficulty}</h3>
         <QuestionContainer
           currentQuestion={this.state.currentQuestion}
           currentAnswer={this.state.currentAnswer}
