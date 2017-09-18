@@ -6,3 +6,11 @@
   display: block;
   background-color: red;
 }
+
+.nameToggle{
+  display: block;
+}
+
+.nameToggleOn{
+  display: none;
+}
