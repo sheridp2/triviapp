@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.showAnswer = this.showAnswer.bind(this);
-    this.handleChange =this.handleChange.bind(this)
+    this.handleChange =this.handleChange.bind(this);
   }
   handleClick() {
     if(this.state.counter > 9){
