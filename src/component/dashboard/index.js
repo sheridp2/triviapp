@@ -29,22 +29,21 @@ class Dashboard extends React.Component {
     if(this.state.counter > 9){
       return alert('GAME OVER');
     }
+    if (!this.state.counter == 0) {
+      this.state.allQuestions[this.state.counter].incorrect_answers.push(
+        this.state.allQuestions[this.state.counter].correct_answer
+      );
+    }
     this.setState({
       counter: this.state.counter + 1,
     });
     this.setState({
       currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
       currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
-      currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
+      currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers.sort(() => Math.random() * 2 - 1),
       currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
       display : 'answerToggle',
     });
-
-    if (!this.state.counter == 0) {
-      this.state.allQuestions[this.state.counter].incorrect_answers.push(
-        this.state.allQuestions[this.state.counter].correct_answer
-      );
-    }
 
   }
   handleChange(e){
@@ -67,7 +66,7 @@ class Dashboard extends React.Component {
           counter: this.state.counter + 1,
           currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
           currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
-          currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
+          currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers.sort(() => Math.random() * 2 - 1),
           currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
           display : 'answerToggle',
         });
@@ -75,27 +74,6 @@ class Dashboard extends React.Component {
 
   }
 
-  // componenWillReceiveProps(state) {
-  //   console.log('state', this.state);
-  //   axios
-  //     .get(`https://opentdb.com/api.php?amount=10&difficulty=${this.state.difficulty}`)
-  //     .then(questions => {
-  //       let res = questions.data.results;
-  //       this.setState({
-  //         allQuestions: res,
-  //       });
-  //       this.state.allQuestions[this.state.counter].incorrect_answers.push(
-  //         this.state.allQuestions[this.state.counter].correct_answer
-  //       );
-  //       this.setState({
-  //         currentQuestion: decodeEntities(this.state.allQuestions[this.state.counter].question),
-  //         currentAnswer: decodeEntities(this.state.allQuestions[this.state.counter].correct_answer),
-  //         currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers,
-  //         currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
-  //         display : 'answerToggle',
-  //       });
-  //     });
-  // }
   showAnswer(){
     let css = (this.state.display === 'answerToggle') ? 'answerToggleOn' : 'answerToggle';
     this.setState({'display': css});
