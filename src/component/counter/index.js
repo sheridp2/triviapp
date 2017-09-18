@@ -12,12 +12,18 @@ class Counter extends Component {
     };
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    this.setState({ name: e.target.value });
   }
 
   render() {
     let { number } = this.state;
     return (
       <div>
+        <input value={this.state.name} onChange={this.handleChange}></input>
+        <h2>Name:{this.state.name}</h2>
         <h2>
           Score : {number}{' '}
         </h2>
