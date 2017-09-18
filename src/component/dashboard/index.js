@@ -1,8 +1,8 @@
 import React from 'react';
-import Counter from '../counter';
 import axios from 'axios';
 import QuestionContainer from '../question-container';
 import DifficultyContainer from '../difficulty-container';
+import CounterContainer from '../counter-container';
 
 function decodeEntities(input) {
   var y = document.createElement('textarea');
@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.showAnswer = this.showAnswer.bind(this);
-    this.handleChange =this.handleChange.bind(this)
+    this.handleChange =this.handleChange.bind(this);
   }
   handleClick() {
     if(this.state.counter > 9){
@@ -103,10 +103,7 @@ class Dashboard extends React.Component {
           <div className={this.state.display}>{this.state.currentAnswer}</div>
         </div>
 
-        <div>
-          <Counter />
-          <button onClick={this.addPlayer}>Add Player</button>
-        </div>
+        <CounterContainer />
 
       </div>
     );

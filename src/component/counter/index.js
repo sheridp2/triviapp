@@ -9,21 +9,37 @@ class Counter extends Component {
     super(props);
     this.state = {
       number: this.props.number || 0,
+      name: '',
+      display: 'nameToggler',
     };
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.nameSubmit = this.nameSubmit.bind(this);
   }
   handleChange(e) {
     this.setState({ name: e.target.value });
   }
 
+  nameSubmit(e){
+    e.preventDefault();
+    let css = (this.state.display === 'nameToggler') ? 'nameToggleOn' : 'nameToggle';
+    this.setState({'display': css});
+  }
+
+
   render() {
     let { number } = this.state;
     return (
       <div>
-        <input value={this.state.name} onChange={this.handleChange}></input>
-        <h2>Name:{this.state.name}</h2>
+        <form className={this.state.display} onSubmit={this.nameSubmit}>
+          <h3>Enter Name</h3>
+
+          <input value={this.state.name} onChange={this.handleChange}></input>
+          <button type="submit">Submit</button>
+        </form>
+
+        <h2>Name: {this.state.name}</h2>
         <h2>
           Score : {number}{' '}
         </h2>
@@ -47,4 +63,4 @@ class Counter extends Component {
   }
 }
 
-export default Counter
+export default Counter;
