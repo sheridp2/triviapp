@@ -49,7 +49,10 @@ class Dashboard extends React.Component {
   }
   handleChange(e){
     e.preventDefault();
-    this.setState({difficulty: e.target.value});
+    this.setState({
+      difficulty: e.target.value,
+      counter: 0,
+    });
     axios
       .get(`https://opentdb.com/api.php?amount=10&difficulty=${this.state.difficulty}`)
       .then(questions => {

@@ -28,7 +28,6 @@ class DifficultyContainer extends Component {
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
-          <button type="submit" name="submit">Select</button>
         </form>
       </div>
 
