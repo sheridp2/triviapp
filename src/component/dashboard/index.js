@@ -24,6 +24,7 @@ class Dashboard extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.showAnswer = this.showAnswer.bind(this);
+    this.handleChange =this.handleChange.bind(this)
   }
   handleClick() {
     if(this.state.counter > 9){
@@ -79,22 +80,34 @@ class Dashboard extends React.Component {
     this.setState({'display': css});
   }
 
+  addPlayer(){
+    console.log('player added');
+
+  }
+
   render() {
     return (
       <div>
         <h1>Triviapp!!!</h1>
-        <DifficultyContainer difficulty={this.state.difficulty} handleChange={this.handleChange.bind(this)}/>
-        <h3>Category:{this.state.currentCategory}</h3>
-        <h3>Difficulty:{this.state.difficulty}</h3>
-        <QuestionContainer
-          currentQuestion={this.state.currentQuestion}
-          currentAnswer={this.state.currentAnswer}
-          currentIncorrect={this.state.currentIncorrect}
-        />
-        <button onClick={this.handleClick}>Next Question</button>
-        <button onClick={this.showAnswer}>Show Answer</button>
-        <div className={this.state.display}>{this.state.currentAnswer}</div>
-        <Counter />
+        <DifficultyContainer difficulty={this.state.difficulty} handleChange={this.handleChange}/>
+        <div>
+          <h3>Category:{this.state.currentCategory}</h3>
+          <h3>Difficulty:{this.state.difficulty}</h3>
+          <QuestionContainer
+            currentQuestion={this.state.currentQuestion}
+            currentAnswer={this.state.currentAnswer}
+            currentIncorrect={this.state.currentIncorrect}
+          />
+          <button onClick={this.handleClick}>Next Question</button>
+          <button onClick={this.showAnswer}>Show Answer</button>
+          <div className={this.state.display}>{this.state.currentAnswer}</div>
+        </div>
+
+        <div>
+          <Counter />
+          <button onClick={this.addPlayer}>Add Player</button>
+        </div>
+
       </div>
     );
   }
