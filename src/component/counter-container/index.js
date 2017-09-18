@@ -27,12 +27,14 @@ class CounterContainer extends Component{
     let players = [];
 
     for(var i = 0; i < this.state.numPlayers; i += 1){
-      players.push(<Counter key={i} />);
+      players.push(<li  key={i}><Counter /></li>);
     }
     return(
       <div>
         <div>
-          {players}
+          <ul className="player-container">
+            {players}
+          </ul>
         </div>
         <div>
           <button onClick={this.addPlayer}>Add Player</button>
