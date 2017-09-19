@@ -7,7 +7,7 @@ class QuestionContainer extends Component {
 
   render() {
     // console.log(this.props);
-    let answers = this.props.currentIncorrect
+    let answers = this.props.currentIncorrect;
     return (
       <div>
         <h2>

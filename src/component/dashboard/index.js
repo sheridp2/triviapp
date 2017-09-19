@@ -103,10 +103,10 @@ class Dashboard extends React.Component {
       <div>
         <h1>Triviapp!!!</h1>
         <DifficultyContainer difficulty={this.state.difficulty} handleChange={this.handleChange}/>
-        <div className={this.state.gameOverDisplay}>
+        <div id={this.state.gameOverDisplay}>
           <GameOver />
         </div>
-        <div className={this.state.hideGame}>
+        <div id={this.state.hideGame}>
           <h3>Category:{this.state.currentCategory}</h3>
           <h3>Difficulty:{this.state.difficulty}</h3>
           <QuestionContainer
@@ -116,7 +116,7 @@ class Dashboard extends React.Component {
           />
           <button onClick={this.handleClick}>Next Question</button>
           <button onClick={this.showAnswer}>Show Answer</button>
-          <div className={this.state.display}>{this.state.currentAnswer}</div>
+          <div id={this.state.display}>{this.state.currentAnswer}</div>
         </div>
 
         <CounterContainer />

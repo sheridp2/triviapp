@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
 import Counter from '../counter';
 
 
@@ -7,11 +8,11 @@ class CounterContainer extends Component{
     super(props);
     this.state = {
       numPlayers: 0,
-      display: 'buttonToggle'
+      display: 'buttonToggle',
     };
 
     this.addPlayer = this.addPlayer.bind(this);
-    this.hideButton = this.hideButton.bind(this)
+    this.hideButton = this.hideButton.bind(this);
   }
 
   hideButton(){
@@ -47,7 +48,7 @@ class CounterContainer extends Component{
           </ul>
         </div>
         <div>
-          <button className={this.state.display} onClick={this.addPlayer}>Add Player</button>
+          <Button bsStyle="primary" id={this.state.display} onClick={this.addPlayer}>Add Player</Button>
         </div>
       </div>
     );
