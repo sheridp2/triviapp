@@ -3,6 +3,7 @@ import axios from 'axios';
 import QuestionContainer from '../question-container';
 import DifficultyContainer from '../difficulty-container';
 import CounterContainer from '../counter-container';
+import GameOver from '../game-over';
 
 function decodeEntities(input) {
   var y = document.createElement('textarea');
@@ -20,15 +21,22 @@ class Dashboard extends React.Component {
       currentIncorrect: [],
       counter: 0,
       display: 'answerToggle',
+      gameOverDisplay: 'gameOverToggler',
+      hideGame: 'hideGameOff',
       difficulty: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.showAnswer = this.showAnswer.bind(this);
     this.handleChange =this.handleChange.bind(this);
+    this.showGameOver = this.showGameOver.bind(this);
+    this.hideGame = this.hideGame.bind(this);
   }
   handleClick() {
     if(this.state.counter > 9){
-      return alert('GAME OVER');
+      this.hideGame();
+      this.showGameOver();
+
+      return('game over');
     }
     if (!this.state.counter == 0) {
       this.state.allQuestions[this.state.counter].incorrect_answers.push(
@@ -70,6 +78,8 @@ class Dashboard extends React.Component {
           currentIncorrect: this.state.allQuestions[this.state.counter].incorrect_answers.sort(() => Math.random() * 2 - 1),
           currentCategory: decodeEntities(this.state.allQuestions[this.state.counter].category),
           display : 'answerToggle',
+          hideGame: 'hideGameOff',
+          gameOverDisplay: 'gameOverToggler',
         });
       });
 
@@ -79,10 +89,13 @@ class Dashboard extends React.Component {
     let css = (this.state.display === 'answerToggle') ? 'answerToggleOn' : 'answerToggle';
     this.setState({'display': css});
   }
-
-  addPlayer(){
-    console.log('player added');
-
+  showGameOver(){
+    let css = (this.state.gameOverDisplay === 'gameOverToggler') ? 'gameOverTogglerOn' : 'gameOverToggler';
+    this.setState({'gameOverDisplay': css});
+  }
+  hideGame(){
+    let css = (this.state.hideGame === 'hideGameOff') ? 'hideGameOn' : 'hideGameOff';
+    this.setState({'hideGame': css});
   }
 
   render() {
@@ -90,7 +103,10 @@ class Dashboard extends React.Component {
       <div>
         <h1>Triviapp!!!</h1>
         <DifficultyContainer difficulty={this.state.difficulty} handleChange={this.handleChange}/>
-        <div>
+        <div className={this.state.gameOverDisplay}>
+          <GameOver />
+        </div>
+        <div className={this.state.hideGame}>
           <h3>Category:{this.state.currentCategory}</h3>
           <h3>Difficulty:{this.state.difficulty}</h3>
           <QuestionContainer
