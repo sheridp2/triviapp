@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import {Table, Button} from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 
 
@@ -32,21 +33,26 @@ class Counter extends Component {
     let { number } = this.state;
     return (
       <div>
-        <form className={this.state.display} onSubmit={this.nameSubmit}>
+        <form id={this.state.display} onSubmit={this.nameSubmit}>
           <h3>Enter Name</h3>
 
           <input value={this.state.name} onChange={this.handleChange}></input>
-          <button type="submit">Submit</button>
+          <Button bsStyle="info" type="submit">Submit</Button>
         </form>
 
-        <h2>Name: {this.state.name}</h2>
+        <h2> {this.state.name} </h2>
         <h2>
-          Score : {number}{' '}
+          Score
         </h2>
-        <div>
-          <button onClick={this.decrement}>Subtract Point</button>
-          <button onClick={this.increment}>Add Point</button>
-        </div>
+        <Table id="score-counter">
+          <tbody>
+            <tr id="num-score">
+              <td><Button bsStyle="danger" onClick={this.decrement}>-</Button></td>
+              <td><h2>{number}</h2></td>
+              <td><Button bsStyle="primary" onClick={this.increment}>+</Button></td>
+            </tr>
+          </tbody>
+        </Table>
       </div>
     );
   }
