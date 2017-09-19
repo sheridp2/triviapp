@@ -22,6 +22,29 @@
 }
 
 .player-container li{
-  width: 25%;
+  width: auto;
   display: inline-block;
+}
+
+.buttonToggle{
+  display: block;
+}
+
+.buttonToggleOn{
+  display: none;
+}
+
+.gameOverToggler{
+  display: none;
+}
+.gameOverTogglerOn{
+  display: block;
+}
+
+.hideGameOn{
+  display: block;
+}
+
+.hideGameOn{
+  display: none
 }

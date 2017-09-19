@@ -7,16 +7,26 @@ class CounterContainer extends Component{
     super(props);
     this.state = {
       numPlayers: 0,
+      display: 'buttonToggle'
     };
 
     this.addPlayer = this.addPlayer.bind(this);
+    this.hideButton = this.hideButton.bind(this)
+  }
+
+  hideButton(){
+    let css = (this.state.display === 'buttonToggle') ? 'buttonToggleOn' : 'buttonToggle';
+    this.setState({'display': css});
   }
 
   addPlayer(e){
     e.preventDefault();
-    if(this.state.numPlayers > 3){
-      console.log('tooo many');
-    }else{
+    if(this.state.numPlayers > 2){
+      this.setState({
+        numPlayers: this.state.numPlayers + 1,
+      });
+      this.hideButton();
+    } else {
       this.setState({
         numPlayers: this.state.numPlayers + 1,
       });
@@ -37,7 +47,7 @@ class CounterContainer extends Component{
           </ul>
         </div>
         <div>
-          <button onClick={this.addPlayer}>Add Player</button>
+          <button className={this.state.display} onClick={this.addPlayer}>Add Player</button>
         </div>
       </div>
     );
