@@ -1,0 +1,53 @@
+#answerToggle {
+  display: none; }
+
+#answerToggleOn {
+  display: block;
+  background-color: red; }
+
+#nameToggle {
+  display: block; }
+
+#nameToggleOn {
+  display: none; }
+
+.player-container {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+.player-container li {
+  width: auto;
+  border: 1px solid black;
+  padding: 1em;
+  display: inline-block; }
+
+#buttonToggle {
+  display: block;
+  margin: 0 auto; }
+
+#buttonToggleOn {
+  display: none; }
+
+#gameOverToggler {
+  display: none; }
+
+#gameOverTogglerOn {
+  display: block; }
+
+#hideGameOn {
+  display: block; }
+
+#hideGameOn {
+  display: none; }
+
+#score-counter {
+  display: inline; }
+
+* {
+  margin: 0 auto;
+  text-align: center; }
+
+#num-score td h2 {
+  padding-top: 0;
+  margin-top: 0; }
