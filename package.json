@@ -10,7 +10,6 @@
     "test": "jest",
     "lint": "eslint .",
     "build": "webpack",
-    "start": "node index.js",
     "heroku-postbuild": "webpack",
     "watch": "webpack-dev-server --inline --hot"
   },
