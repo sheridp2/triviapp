@@ -30,8 +30,11 @@ body{
 }
 
 .player-container li{
+  color: #ffffff;
+  margin-top: 1em;
+  margin-bottom: 1em;
   width: auto;
-  border: 1px solid black;
+  border: 1px solid white;
   padding: 1em;
   display: inline-block;
 }
@@ -91,6 +94,8 @@ h1 {
   font-weight: 800;
   line-height: 72px;
   margin: 0 0 24px;
+  text-decoration: underline;
+  text-decoration-color: red;
   text-align: center;
   text-transform: uppercase;
 }
@@ -101,13 +106,14 @@ h1 {
 }
 
 #answer-list{
-  font-size: 2em;
+  margin-top: 1em;
+  font-size: 1.75em;
   color: #ffffff;
 }
 
 #q-info{
   color: #ffffff;
-  
+
 }
 
 .correct-container{
