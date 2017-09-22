@@ -108,8 +108,8 @@ class Dashboard extends React.Component {
           <GameOver />
         </div>
         <div id={this.state.hideGame}>
-          <h3>{this.state.currentCategory}</h3>
-          <h3>Difficulty: {this.state.difficulty}</h3>
+          <h3 id="q-info">{this.state.currentCategory}</h3>
+          <h3 id="q-info">Difficulty: {this.state.difficulty}</h3>
           <QuestionContainer
             currentQuestion={this.state.currentQuestion}
             currentAnswer={this.state.currentAnswer}
