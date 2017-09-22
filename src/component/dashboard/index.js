@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from 'react-bootstrap';
 import axios from 'axios';
 import QuestionContainer from '../question-container';
 import DifficultyContainer from '../difficulty-container';
@@ -101,22 +102,22 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <h1>Triviapp!!!</h1>
+        <h1>Guess Work</h1>
         <DifficultyContainer difficulty={this.state.difficulty} handleChange={this.handleChange}/>
         <div id={this.state.gameOverDisplay}>
           <GameOver />
         </div>
         <div id={this.state.hideGame}>
-          <h3>Category:{this.state.currentCategory}</h3>
-          <h3>Difficulty:{this.state.difficulty}</h3>
+          <h3>{this.state.currentCategory}</h3>
+          <h3>Difficulty: {this.state.difficulty}</h3>
           <QuestionContainer
             currentQuestion={this.state.currentQuestion}
             currentAnswer={this.state.currentAnswer}
             currentIncorrect={this.state.currentIncorrect}
           />
-          <button onClick={this.handleClick}>Next Question</button>
-          <button onClick={this.showAnswer}>Show Answer</button>
-          <div id={this.state.display}>{this.state.currentAnswer}</div>
+          <Button bsStyle="success" onClick={this.handleClick}>Next Question</Button>
+          <Button bsStyle="danger" onClick={this.showAnswer}>Show Answer</Button>
+          <div className="correct-container" id={this.state.display}>{this.state.currentAnswer}</div>
         </div>
 
         <CounterContainer />
