@@ -6,8 +6,9 @@ class Landing extends React.Component {
     return (
       <div>
         <h1>Welcome to Guess Work!</h1>
-        <p>Description will go here</p>
-        <Link to='/play'>Start Game</Link>
+        <h2>Gather your friends and have fun answering trivia!</h2>
+
+        <Link id="start-button" to='/play'>Start Game</Link>
       </div>
     );
   }
