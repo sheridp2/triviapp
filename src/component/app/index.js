@@ -12,7 +12,7 @@ class App extends React.Component {
         <div>
           <Switch>
             <Route exact path="/" component={Landing}/>
-            <Route exact path="/play" component={Dashboard} question={this.state}/>
+            <Route exact path="/play" component={Dashboard} />
           </Switch>
       </div>
       </BrowserRouter>
